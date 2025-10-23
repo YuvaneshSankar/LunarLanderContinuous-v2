@@ -1,23 +1,24 @@
 env:
-  id: LunarLanderContinuous-v2
+  name: LunarLanderContinuous-v2
   max_episode_steps: 1000
-  reward_threshold: 200
 
-seed: 42
-
-agent:
-  gamma: 0.99        # Discount factor
-  tau: 0.005         # Target network soft update rate
-  actor_lr: 1e-3     # Actor learning rate
-  critic_lr: 1e-3    # Critic learning rate
-  batch_size: 100
-  buffer_size: 1000000
-
-training:
-  max_episodes: 1000
-  max_timesteps: 1000
-  policy_delay: 2     # Delayed policy update freq (TD3 feature)
+train:
+  total_timesteps: 500000
+  batch_size: 256
+  gamma: 0.99
+  tau: 0.005              # Target network update rate
+  policy_noise: 0.2       # Noise added to target policy
+  noise_clip: 0.5         # Range to clip target policy noise
+  policy_freq: 2          # Frequency of delayed policy updates
+  learning_rate_actor: 0.0001
+  learning_rate_critic: 0.001
+  start_timesteps: 10000  # Timesteps to use random policy for exploration
+  replay_buffer_size: 1_000_000
 
 exploration:
-  noise_std_dev: 0.2
-  noise_clip: 0.5
+  noise_std_dev: 0.1      # Std deviation for exploration noise
+
+logging:
+  log_interval: 10        # Episodes between logging training info
+  save_interval: 5000     # Steps between saving model checkpoints
+  checkpoint_path: ./logs/checkpoints/
