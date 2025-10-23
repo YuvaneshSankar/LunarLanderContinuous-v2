@@ -24,3 +24,4 @@ class LunarLanderEnv:
 
     def close(self):
         self.env.close()
+
