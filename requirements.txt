@@ -1,0 +1,6 @@
+torch>=1.8.0
+gym[box2d]
+numpy
+pyyaml
+tqdm
+matplotlib
